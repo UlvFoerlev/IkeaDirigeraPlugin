@@ -1,18 +1,13 @@
 {
     "version": "1.00",
     "thumbnail": "store/Thumbnail.png",
-    "id": "uf_easy_sound",
-    "name": "Youtube Playlist",
+    "id": "uf_ikea_smart_home",
+    "name": "Ikea Smart Home",
     "descriptions": {
-        "en_US": "This plugin allows you to play songs from a youtube playlist through the browser."
+        "en_US": "Take control of your Ikea Smart Home Diregera hub.."
     },
     "short-descriptions": {
-        "en_US": "Control youtube playlist."
+        "en_US": "Ikea smart home controller."
     },
-    "tags": [
-        "Audio",
-        "Youtube",
-        "Browser",
-        "Music"
-    ]
+]
 }
