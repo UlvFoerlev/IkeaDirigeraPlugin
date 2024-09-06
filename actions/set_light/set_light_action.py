@@ -50,7 +50,7 @@ class SetLightAction(LightAction):
         temp_max = self.light.attributes.color_temperature_max if self.light else 100
 
         if temp_min > self.color_temperature or self.color_temperature > temp_max:
-            self.color_temperature = temp_min + int((temp_max - temp_min) / 2)
+            self.color_temperature = temp_min
 
         self.color_temperature_scale = ScaleRow(
             title=self.plugin_base.lm.get("action.generic.volume"),
