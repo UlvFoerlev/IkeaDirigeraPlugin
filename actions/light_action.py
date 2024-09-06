@@ -47,7 +47,7 @@ class LightAction(IkeaActionBase):
         self.mode_row.combo_box.set_active(selected_light_index)
 
         # Connect entries
-        self.mode_row.combo_box.connect("changed", self.on_select_mode)
+        self.mode_row.combo_box.connect("changed", self.on_select_light)
 
         base.append(self.mode_row)
 
@@ -119,3 +119,6 @@ class LightAction(IkeaActionBase):
             )
 
         self._set_property(key="light_color_saturation", value=saturation)
+
+    def on_select_mode(self, option):
+        pass
