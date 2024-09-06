@@ -9,6 +9,7 @@ class LightAction(IkeaActionBase):
 
     def get_config_rows(self):
         base = super().get_config_rows()
+        self.setup_select_light(base=base)
 
         return base
 
