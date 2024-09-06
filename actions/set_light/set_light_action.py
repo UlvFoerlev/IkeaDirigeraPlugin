@@ -21,7 +21,7 @@ class SetLightAction(LightAction):
     def on_key_down(self):
         # Initiate hub if not initiated yet
         if not self.plugin_base.backend.hub:
-            self.plugin_base.backend.refresh_hub()
+            self.refresh_hub()
 
         # Initiate cache of lights, if not initiated yet
         if not self.plugin_base.backend.lights_cache:
