@@ -17,6 +17,7 @@ class Backend(BackendBase):
 
         self.hub = hub
         self.load_lights()
+        print(self.hub)
         return self.hub
 
     def load_lights(self):

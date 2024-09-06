@@ -26,6 +26,7 @@ class LightAction(IkeaActionBase):
         self.plugin_base.backend.load_lights()
 
         self.dropdown_option.clear()
+        print(self.lights)
         for i, light in enumerate(self.lights):
             name = (
                 light.attributes.custom_name
