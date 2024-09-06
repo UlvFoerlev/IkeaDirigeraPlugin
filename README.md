@@ -1,2 +1,3 @@
 # IkeaDirigeraPlugin
-Light controls for Mothership
+Just some basic controls.
+
