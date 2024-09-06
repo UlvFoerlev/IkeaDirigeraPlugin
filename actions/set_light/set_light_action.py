@@ -23,6 +23,7 @@ class SetLightAction(LightAction):
 
         base = super().get_config_rows()
         self.setup_light_level_settings(base=base)
+        self.setup_color_temperature_settings(base=base)
 
         return base
 
@@ -44,8 +45,35 @@ class SetLightAction(LightAction):
 
         base.append(self.light_level_scale)
 
+    def setup_color_temperature_settings(self, base):
+        temp_min = self.light.attributes.color_temperature_min if self.light else 0
+        temp_max = self.light.attributes.color_temperature_max if self.light else 100
+
+        if temp_min > self.color_temperature or self.color_temperature > temp_max:
+            self.color_temperature = temp_min + int((temp_max - temp_min) / 2)
+
+        self.color_temperature_scale = ScaleRow(
+            title=self.plugin_base.lm.get("action.generic.volume"),
+            value=self.color_temperature,
+            min=temp_min,
+            max=temp_max,
+            step=1,
+            text_left=str(temp_min),
+            text_right=str(temp_max),
+        )
+        self.color_temperature_scale.scale.set_draw_value(True)
+
+        self.color_temperature_scale.adjustment.connect(
+            "value-changed", self.on_color_temperature_scale_change
+        )
+
+        base.append(self.color_temperature_scale)
+
     def on_light_level_scale_change(self, entry):
         self.light_level = entry.get_value()
+
+    def on_color_temperature_scale_change(self, entry):
+        self.color_temperature = entry.get_value()
 
     def on_key_down(self):
         # Initiate hub if not initiated yet
