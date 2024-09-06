@@ -2,6 +2,7 @@ from streamcontroller_plugin_tools import BackendBase
 from pathlib import Path
 from dirigera import Hub
 from dirigera.devices.light import Light
+from requests import ConnectionError
 
 
 class Backend(BackendBase):
@@ -17,8 +18,11 @@ class Backend(BackendBase):
 
         self.hub = hub
         self.load_lights()
-        print(self.hub)
+        print(self.hub, self.lights_cache)
         return self.hub
+
+    def reset_hub(self):
+        self.hub = None
 
     def load_lights(self):
         self.lights_cache = {x.id: x for x in self.lights}
@@ -28,7 +32,11 @@ class Backend(BackendBase):
         if not self.hub:
             return []
 
-        return self.hub.get_lights()
+        try:
+            return self.hub.get_lights()
+        except ConnectionError:
+            self.reset_hub()
+            return []
 
 
 backend = Backend()
