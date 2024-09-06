@@ -1,0 +1,18 @@
+{
+    "version": "1.00",
+    "thumbnail": "store/Thumbnail.png",
+    "id": "uf_easy_sound",
+    "name": "Youtube Playlist",
+    "descriptions": {
+        "en_US": "This plugin allows you to play songs from a youtube playlist through the browser."
+    },
+    "short-descriptions": {
+        "en_US": "Control youtube playlist."
+    },
+    "tags": [
+        "Audio",
+        "Youtube",
+        "Browser",
+        "Music"
+    ]
+}
