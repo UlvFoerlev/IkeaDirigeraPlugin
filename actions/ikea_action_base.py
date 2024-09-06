@@ -7,6 +7,9 @@ class IkeaActionBase(ActionBase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        if self.hub_ip and self.hub_token:
+            self.setup_hub(ip=self.hub_ip, token=self.hub_token)
+
     def _get_property(
         self, key: str, default: Any = None, enforce_type: type | None = None
     ) -> Any:
