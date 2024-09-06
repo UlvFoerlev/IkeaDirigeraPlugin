@@ -22,7 +22,7 @@ class SetLightAction(LightAction):
         self.refresh_hub()
 
         base = super().get_config_rows()
-        self.setup_light_level_settings()
+        self.setup_light_level_settings(base=base)
 
         return base
 
