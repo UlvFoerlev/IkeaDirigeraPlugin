@@ -16,6 +16,8 @@ class SetLightAction(LightAction):
         if not self.selected_light:
             return None
 
+        print(self.selected_light, self.plugin_base.backend.lights_cache)
+
         return self.plugin_base.backend.lights_cache.get(self.selected_light)
 
     def on_key_down(self):
