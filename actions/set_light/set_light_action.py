@@ -13,24 +13,25 @@ class SetLightAction(LightAction):
 
     @property
     def light(self):
-        if not self.plugin_base.backend.lights_cache:
-            self.plugin_base.backend.load_lights()
-
         if not self.selected_light:
             return None
-
-        print(self.selected_light, self.plugin_base.backend.lights_cache)
 
         return self.plugin_base.backend.lights_cache.get(self.selected_light)
 
     def on_key_down(self):
+        if not self.plugin_base.backend.hub:
+            self.plugin_base.backend.refresh_hub()
+
+        if not self.plugin_base.backend.lights_cache:
+            self.plugin_base.backend.load_lights()
+
         print(self.light, self.active, self.active)
         if not self.light:
             return
 
         self.light.set_light(lamp_on=self.active)
         if self.active:
-            self.light.set_light_level(ligth_level=self.light_level)
+            self.light.set_light_level(light_level=self.light_level)
             self.light.set_color_temperature(color_temp=self.color_temperature)
             self.light.set_light_color(
                 hue=self.light_color_hue, saturation=self.light_color_saturation
