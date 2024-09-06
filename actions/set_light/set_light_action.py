@@ -13,6 +13,9 @@ class SetLightAction(LightAction):
 
     @property
     def light(self):
+        if not self.plugin_base.backend.lights_cache:
+            self.plugin.backend.load_lights()
+
         if not self.selected_light:
             return None
 
