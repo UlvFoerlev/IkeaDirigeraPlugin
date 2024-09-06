@@ -91,9 +91,7 @@ class LightAction(IkeaActionBase):
 
     @property
     def color_temperature(self) -> int:
-        return self._get_property(
-            key="color_temperature", default=100, enforce_type=int
-        )
+        return self._get_property(key="color_temperature", default=0, enforce_type=int)
 
     @color_temperature.setter
     def color_temperature(self, temperature: int):
