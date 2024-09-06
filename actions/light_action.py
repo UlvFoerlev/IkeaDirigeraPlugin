@@ -40,6 +40,9 @@ class LightAction(IkeaActionBase):
             if light.id == self.selected_light:
                 selected_light_index = i
 
+        if not self.selected_light:
+            self.selected_light = self.lights[0].id
+
         self.mode_cell_renderer = Gtk.CellRendererText(
             ellipsize=Pango.EllipsizeMode.END, max_width_chars=60
         )
