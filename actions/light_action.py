@@ -98,15 +98,15 @@ class LightAction(IkeaActionBase):
         self._set_property(key="color_temperature", value=temperature)
 
     @property
-    def light_color_hue(self) -> int:
-        return self._get_property(key="light_color_hue", default=100, enforce_type=int)
+    def color_hue(self) -> int:
+        return self._get_property(key="color_hue", default=100, enforce_type=int)
 
-    @light_color_hue.setter
-    def light_color_hue(self, hue: int):
+    @color_hue.setter
+    def color_hue(self, hue: int):
         if hue < 0 or hue > 360:
             raise ValueError(f"Parameter 'hue' must be between 0 and 360, not {hue}.")
 
-        self._set_property(key="light_color_hue", value=hue)
+        self._set_property(key="color_hue", value=hue)
 
     @property
     def light_color_saturation(self) -> float:

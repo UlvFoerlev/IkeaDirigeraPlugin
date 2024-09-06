@@ -72,11 +72,32 @@ class SetLightAction(LightAction):
 
         base.append(self.color_temperature_scale)
 
+    def setup_color_hue_settings(self, base):
+        self.color_hue_scale = ScaleRow(
+            title=self.plugin_base.lm.get("action.generic.volume"),
+            value=self.color_hue,
+            min=0,
+            max=360,
+            step=1,
+            text_left="0",
+            text_right="360",
+        )
+        self.color_hue_scale.scale.set_draw_value(True)
+
+        self.color_hue_scale.adjustment.connect(
+            "value-changed", self.on_color_hue_scale_change
+        )
+
+        base.append(self.color_hue_scale)
+
     def on_light_level_scale_change(self, entry):
         self.light_level = entry.get_value()
 
     def on_color_temperature_scale_change(self, entry):
         self.color_temperature = entry.get_value()
+
+    def on_color_hue_scale_change(self, entry):
+        self.color_hue = entry.get_value()
 
     def on_key_down(self):
         # Initiate hub if not initiated yet
@@ -91,7 +112,6 @@ class SetLightAction(LightAction):
         if not self.selected_light and self.lights:
             self.selected_light = self.lights[0].id
 
-        print(self.light, self.active, self.active)
         if not self.light:
             return
 
@@ -100,5 +120,5 @@ class SetLightAction(LightAction):
             self.light.set_light_level(light_level=self.light_level)
             self.light.set_color_temperature(color_temp=self.color_temperature)
             self.light.set_light_color(
-                hue=self.light_color_hue, saturation=self.light_color_saturation
+                hue=self.color_hue, saturation=self.light_color_saturation
             )
