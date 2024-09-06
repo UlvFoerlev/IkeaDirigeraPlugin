@@ -49,6 +49,9 @@ class SetLightAction(LightAction):
         temp_min = self.light.attributes.color_temperature_min if self.light else 0
         temp_max = self.light.attributes.color_temperature_max if self.light else 100
 
+        if temp_min > temp_max:
+            temp_min, temp_max = temp_max, temp_min
+
         if temp_min > self.color_temperature or self.color_temperature > temp_max:
             self.color_temperature = temp_min
 
