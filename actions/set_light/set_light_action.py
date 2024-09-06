@@ -31,7 +31,7 @@ class SetLightAction(LightAction):
 
     def setup_light_level_settings(self, base):
         self.light_level_scale = ScaleRow(
-            title=self.plugin_base.lm.get("action.generic.volume"),
+            title=self.plugin_base.lm.get("action.set-light.light-level"),
             value=self.light_level,
             min=1,
             max=100,
@@ -58,7 +58,7 @@ class SetLightAction(LightAction):
         self.color_temperature = max(min(self.color_temperature, temp_max), temp_min)
 
         self.color_temperature_scale = ScaleRow(
-            title=self.plugin_base.lm.get("action.generic.volume"),
+            title=self.plugin_base.lm.get("action.set-light.temperature"),
             value=self.color_temperature,
             min=temp_min,
             max=temp_max,
@@ -76,7 +76,7 @@ class SetLightAction(LightAction):
 
     def setup_color_hue_settings(self, base):
         self.color_hue_scale = ScaleRow(
-            title=self.plugin_base.lm.get("action.generic.volume"),
+            title=self.plugin_base.lm.get("action.set-light.hue"),
             value=self.color_hue,
             min=0,
             max=360,
@@ -94,7 +94,7 @@ class SetLightAction(LightAction):
 
     def setup_color_saturation_settings(self, base):
         self.color_saturation_scale = ScaleRow(
-            title=self.plugin_base.lm.get("action.generic.volume"),
+            title=self.plugin_base.lm.get("action.set-light.saturation"),
             value=self.color_saturation,
             min=0.0,
             max=1.0,
@@ -111,13 +111,13 @@ class SetLightAction(LightAction):
         base.append(self.color_saturation_scale)
 
     def on_light_level_scale_change(self, entry):
-        self.light_level = entry.get_value()
+        self.light_level = int(entry.get_value())
 
     def on_color_temperature_scale_change(self, entry):
-        self.color_temperature = entry.get_value()
+        self.color_temperature = int(entry.get_value())
 
     def on_color_hue_scale_change(self, entry):
-        self.color_hue = entry.get_value()
+        self.color_hue = int(entry.get_value())
 
     def on_color_saturation_scale_change(self, entry):
         self.color_saturation = entry.get_value()

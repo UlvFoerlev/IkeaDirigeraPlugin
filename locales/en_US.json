@@ -1,4 +1,8 @@
 {
     "action.set-light.name": "Set Light",
-    "action.light-action.select_light": "Select Light"
+    "action.light-action.select_light": "Select Light",
+    "action.set-light.saturation": "Saturation",
+    "action.set-light.light-level": "Light Level",
+    "action.set-light.hue": "Hue",
+    "action.set-light.temperature": "Temperature"
 }
