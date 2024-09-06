@@ -24,6 +24,8 @@ class SetLightAction(LightAction):
         base = super().get_config_rows()
         self.setup_light_level_settings(base=base)
         self.setup_color_temperature_settings(base=base)
+        self.setup_color_hue_settings(base=base)
+        self.setup_color_saturation_settings(base=base)
 
         return base
 
@@ -90,6 +92,24 @@ class SetLightAction(LightAction):
 
         base.append(self.color_hue_scale)
 
+    def setup_color_saturation_settings(self, base):
+        self.color_saturation_scale = ScaleRow(
+            title=self.plugin_base.lm.get("action.generic.volume"),
+            value=self.color_saturation,
+            min=0.0,
+            max=1.0,
+            step=0.05,
+            text_left="0",
+            text_right="1",
+        )
+        self.color_saturation_scale.scale.set_draw_value(True)
+
+        self.color_saturation_scale.adjustment.connect(
+            "value-changed", self.on_color_saturation_scale_change
+        )
+
+        base.append(self.color_saturation_scale)
+
     def on_light_level_scale_change(self, entry):
         self.light_level = entry.get_value()
 
@@ -98,6 +118,9 @@ class SetLightAction(LightAction):
 
     def on_color_hue_scale_change(self, entry):
         self.color_hue = entry.get_value()
+
+    def on_color_saturation_scale_change(self, entry):
+        self.color_saturation = entry.get_value()
 
     def on_key_down(self):
         # Initiate hub if not initiated yet
@@ -120,5 +143,5 @@ class SetLightAction(LightAction):
             self.light.set_light_level(light_level=self.light_level)
             self.light.set_color_temperature(color_temp=self.color_temperature)
             self.light.set_light_color(
-                hue=self.color_hue, saturation=self.light_color_saturation
+                hue=self.color_hue, saturation=self.color_saturation
             )

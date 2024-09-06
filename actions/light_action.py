@@ -109,19 +109,17 @@ class LightAction(IkeaActionBase):
         self._set_property(key="color_hue", value=hue)
 
     @property
-    def light_color_saturation(self) -> float:
-        return self._get_property(
-            key="light_color_saturation", default=1, enforce_type=float
-        )
+    def color_saturation(self) -> float:
+        return self._get_property(key="color_saturation", default=1, enforce_type=float)
 
-    @light_color_saturation.setter
-    def light_color_saturation(self, saturation: float):
+    @color_saturation.setter
+    def color_saturation(self, saturation: float):
         if saturation < 0 or saturation > 1:
             raise ValueError(
                 f"Parameter 'saturation' must be between 0 and 1, not {saturation}."
             )
 
-        self._set_property(key="light_color_saturation", value=saturation)
+        self._set_property(key="color_saturation", value=saturation)
 
     def on_select_light(self, option):
         selected_light = option.get_active()
