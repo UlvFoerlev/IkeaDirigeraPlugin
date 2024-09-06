@@ -10,7 +10,7 @@ class Backend(BackendBase):
 
         self.hub: Hub | None = None
 
-        self.lights: dict[str, Light] = {}
+        self.lights_cache: dict[str, Light] = {}
 
     def setup_hub(self, ip: str, token: str) -> Hub:
         hub = Hub(token=token, ip_address=ip)
@@ -20,7 +20,7 @@ class Backend(BackendBase):
         return self.hub
 
     def load_lights(self):
-        self.lights = {x.id: x for x in self.lights}
+        self.lights_cache = {x.id: x for x in self.lights}
 
     @property
     def lights(self) -> list[Light]:
