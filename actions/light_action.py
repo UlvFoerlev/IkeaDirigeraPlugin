@@ -23,6 +23,8 @@ class LightAction(IkeaActionBase):
 
         selected_light_index = 0
 
+        # Make sure everything is running
+        self.refresh_hub()
         self.plugin_base.backend.load_lights()
 
         self.dropdown_option.clear()

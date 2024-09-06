@@ -41,8 +41,7 @@ class IkeaActionBase(ActionBase):
         base.append(self.token_input)
 
     def get_config_rows(self):
-        if self.hub_ip and self.hub_token:
-            self.setup_hub(ip=self.hub_ip, token=self.hub_token)
+        self.refresh_hub()
 
         base = super().get_config_rows()
         self.setup_hub_info_input(base=base)
@@ -84,3 +83,7 @@ class IkeaActionBase(ActionBase):
 
     def on_token_change(self, entry, _):
         self.hub_token = entry.get_text()
+
+    def refresh_hub(self):
+        if self.hub_ip and self.hub_token:
+            self.setup_hub(ip=self.hub_ip, token=self.hub_token)
