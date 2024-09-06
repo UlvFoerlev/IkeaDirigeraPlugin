@@ -76,7 +76,7 @@ class IkeaActionBase(ActionBase):
     def on_ip_change(self, entry, _):
         self.hub_ip = entry.get_text()
 
-        if self.hub_ip and self.self.hub_token:
+        if self.hub_ip and self.hub_token:
             self.setup_hub(ip=self.hub_ip, token=self.hub_token)
 
     def on_token_change(self, entry, _):
