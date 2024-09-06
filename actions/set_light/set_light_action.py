@@ -19,11 +19,17 @@ class SetLightAction(LightAction):
         return self.plugin_base.backend.lights_cache.get(self.selected_light)
 
     def on_key_down(self):
+        # Initiate hub if not initiated yet
         if not self.plugin_base.backend.hub:
             self.plugin_base.backend.refresh_hub()
 
+        # Initiate cache of lights, if not initiated yet
         if not self.plugin_base.backend.lights_cache:
             self.plugin_base.backend.load_lights()
+
+        # If lights, and none selected, pick the first
+        if not self.selected_light and self.lights:
+            self.selected_light = self.lights[0].id
 
         print(self.light, self.active, self.active)
         if not self.light:
