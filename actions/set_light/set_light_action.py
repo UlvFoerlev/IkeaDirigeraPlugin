@@ -11,7 +11,12 @@ class SetLightAction(LightAction):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.light = None
+    @property
+    def light(self):
+        if not self.selected_light:
+            return None
+
+        return self.plugin_base.backend.cached_lights.get(self.selected_light)
 
     def on_key_down(self):
         if not self.light:

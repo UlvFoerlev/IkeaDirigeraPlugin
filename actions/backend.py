@@ -18,7 +18,6 @@ class Backend(BackendBase):
 
         self.hub = hub
         self.load_lights()
-        print(self.hub, self.lights_cache)
         return self.hub
 
     def reset_hub(self):
