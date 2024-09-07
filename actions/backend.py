@@ -73,7 +73,11 @@ class Backend(BackendBase):
         if hue is not None or saturation is not None:
             new_hue = hue if hue is not None else light.attributes.color_hue
             new_hue = clamp(new_hue, 0, 360)
-            new_saturation = saturation if saturation is not None or light.attributes.color_saturation
+            new_saturation = (
+                saturation
+                if saturation is not None
+                else light.attributes.color_saturation
+            )
             new_saturation = clamp(new_saturation, 0.0, 1.0)
 
             light.set_light_color(hue=new_hue, saturation=new_saturation)
