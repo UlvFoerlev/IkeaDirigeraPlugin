@@ -1,6 +1,7 @@
 from src.backend.PluginManager.ActionBase import ActionBase
 from typing import Any
 from gi.repository import Adw
+import socket
 
 
 class IkeaActionBase(ActionBase):
@@ -85,6 +86,13 @@ class IkeaActionBase(ActionBase):
     def on_token_change(self, entry, _):
         self.hub_token = entry.get_text()
 
+    def valid_ip(self, ip: str) -> bool:
+        try:
+            socket.inet_aton(ip)
+            return True
+        except socket.error:
+            return False
+
     def refresh_hub(self):
-        if self.hub_ip and self.hub_token:
+        if self.hub_ip and self.valid_ip(self.hub_ip) and self.hub_token:
             self.setup_hub(ip=self.hub_ip, token=self.hub_token)
