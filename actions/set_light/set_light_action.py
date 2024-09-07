@@ -138,10 +138,11 @@ class SetLightAction(LightAction):
         if not self.light:
             return
 
-        self.light.set_light(lamp_on=self.active)
-        if self.active:
-            self.light.set_light_level(light_level=self.light_level)
-            self.light.set_color_temperature(color_temp=self.color_temperature)
-            self.light.set_light_color(
-                hue=self.color_hue, saturation=self.color_saturation
-            )
+        self.plugin_base.backend.set_light_state(
+            light=self.light,
+            active=self.active,
+            level=self.light_level,
+            temperature=self.color_saturation,
+            hue=self.color_hue,
+            saturation=self.color_saturation,
+        )

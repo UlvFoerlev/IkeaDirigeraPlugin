@@ -37,5 +37,30 @@ class Backend(BackendBase):
             self.reset_hub()
             return []
 
+    def set_light_state(
+        self,
+        light: Light,
+        active: bool = True,
+        level: int | None = None,
+        temperature: int | None = None,
+        hue: int | None = None,
+        saturation: int | None = None,
+    ):
+        self.light.set_light(lamp_on=self.active)
+
+        if active is False:
+            return
+
+        if level:
+            self.light.set_light_level(level)
+        if temperature:
+            self.light.set_color_temperature(color_temp=temperature)
+
+        if hue or saturation:
+            new_hue = hue or light.attributes.color_hue
+            new_saturation = saturation or light.attributes.color_saturation
+
+            self.light.set_light_color(hue=new_hue, saturation=new_saturation)
+
 
 backend = Backend()
