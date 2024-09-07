@@ -104,7 +104,7 @@ class SetLightRGBAction(SetLightAction):
         self._set_property(key="color_blue", value=value)
 
     def _calculate_hue_from_rgb(self, r: float, g: float, b: float) -> int:
-        hue = 0
+        hue = 0.0
 
         if r == g == b:
             return 0
@@ -123,12 +123,21 @@ class SetLightRGBAction(SetLightAction):
         if delta == 0:
             return 0
 
-        l = self._calculate_light_level_from_rgb(r, g, b)
+        light_level = self._calculate_light_level_from_rgb(r, g, b)
 
-        return delta / (1 - abs(2 * l - 1))
+        return delta / (1 - abs(2 * light_level - 1))
 
     def _calculate_light_level_from_rgb(self, r: float, g: float, b: float) -> int:
         return int(max([r, g, b]) + min([r, g, b]) / 2)
+
+    def on_color_red_slider_change(self, entry):
+        self.color_red = int(entry.get_value())
+
+    def on_color_green_slider_change(self, entry):
+        self.color_green = int(entry.get_value())
+
+    def on_color_blue_slider_change(self, entry):
+        self.color_blue = int(entry.get_value())
 
     def on_key_down(self):
         # Initiate hub if not initiated yet
