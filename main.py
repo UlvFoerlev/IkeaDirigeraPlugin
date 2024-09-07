@@ -4,6 +4,8 @@ from src.backend.PluginManager.ActionHolder import ActionHolder
 from pathlib import Path
 
 from .actions.set_light.set_light_action import SetLightAction
+from .actions.set_light.set_light_action_rgb import SetLightRGBAction
+
 
 # Wiki
 # https://core447.com/streamcontroller/docs/latest/
@@ -27,13 +29,21 @@ class PluginYoutubePlaylist(PluginBase):
         )
 
     def setup_actions(self):
-        self.action_play_video = ActionHolder(
+        self.set_light_HSL = ActionHolder(
             plugin_base=self,
             action_base=SetLightAction,
-            action_id="dev_uf_IkeaDirigera::SetLight",
-            action_name=self.lm.get("action.set-light.name"),
+            action_id="dev_uf_IkeaDirigera::SetLightHSL",
+            action_name=self.lm.get("action.set-light-hsl.name"),
         )
-        self.add_action_holder(self.action_play_video)
+        self.add_action_holder(self.set_light_HSL)
+
+        self.set_light_RGB = ActionHolder(
+            plugin_base=self,
+            action_base=SetLightRGBAction,
+            action_id="dev_uf_IkeaDirigera::SetLightRGB",
+            action_name=self.lm.get("action.set-light-rgb.name"),
+        )
+        self.add_action_holder(self.set_light_RGB)
 
     def setup_backend(self):
         # Launch backend

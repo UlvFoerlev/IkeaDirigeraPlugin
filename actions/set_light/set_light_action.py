@@ -18,12 +18,16 @@ class SetLightAction(LightAction):
 
         return self.plugin_base.backend.lights_cache.get(self.selected_light)
 
-    def get_config_rows(self):
-        base = super().get_config_rows()
+    def _setup_settings(self, base):
         self.setup_light_level_settings(base=base)
         # self.setup_color_temperature_settings(base=base)
         self.setup_color_hue_settings(base=base)
         self.setup_color_saturation_settings(base=base)
+        pass
+
+    def get_config_rows(self):
+        base = super().get_config_rows()
+        self._setup_settings(self, base)
 
         return base
 
