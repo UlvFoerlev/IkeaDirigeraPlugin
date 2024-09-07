@@ -59,7 +59,9 @@ class IkeaActionBase(ActionBase):
         if not isinstance(ip, str):
             raise TypeError(f"Type of parameter 'ip' must be 'str' not '{type(ip)}'")
 
-        self._set_property(key="hub_ip", value=ip)
+        sanitized_ip = ip.replace(" ", "")
+
+        self._set_property(key="hub_ip", value=sanitized_ip)
 
     @property
     def hub_token(self) -> str:
@@ -72,7 +74,9 @@ class IkeaActionBase(ActionBase):
                 f"Type of parameter 'token' must be 'str' not '{type(token)}'"
             )
 
-        self._set_property(key="hub_token", value=token)
+        sanitized_token = token.replace(" ", "")
+
+        self._set_property(key="hub_token", value=sanitized_token)
 
     def setup_hub(self, ip: str, token: str):
         self.plugin_base.backend.setup_hub(ip=ip, token=token)
