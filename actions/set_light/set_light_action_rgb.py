@@ -106,13 +106,13 @@ class SetLightRGBAction(SetLightAction):
     def _calculate_hue_from_rgb(self, r: float, g: float, b: float) -> int:
         hue = 0.0
 
-        if r == g == b:
-            return 0
-
         delta = max([r, g, b]) - min([r, g, b])
 
+        if (r == g == b) or delta == 0:
+            return 0
+
         if r >= g and r >= b:
-            hue = (g - b) / delta
+            hue = ((g - b) / delta) % 6
         elif g >= r and g >= b:
             hue = 2.0 + (b - r) / delta
         elif b >= g and b >= r:
