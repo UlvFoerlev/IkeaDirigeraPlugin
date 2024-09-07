@@ -109,7 +109,6 @@ class SetLightRGBAction(SetLightAction):
 
         delta = max([r, g, b]) - min([r, g, b])
 
-        print((r == g == b), delta)
         if (r == g == b) or delta == 0:
             return 0
 
@@ -119,8 +118,6 @@ class SetLightRGBAction(SetLightAction):
             hue = 2.0 + (b - r) / delta
         elif b >= g and b >= r:
             hue = 4.0 + (r - g) / delta
-
-        print(hue, int(hue * 60.0) % 360)
 
         return int(hue * 60.0) % 360
 
@@ -170,12 +167,9 @@ class SetLightRGBAction(SetLightAction):
         G = self.color_green / 255
         B = self.color_blue / 255
 
-        print(R, G, B)
-
         hue = self._calculate_hue_from_rgb(R, G, B)
         saturation = self._calculate_saturation_from_rgb(R, G, B)
         light_level = self._calculate_light_level_from_rgb(R, G, B)
-        print(light_level)
 
         self.plugin_base.backend.set_light_state(
             light=self.light,

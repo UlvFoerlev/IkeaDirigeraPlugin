@@ -123,5 +123,9 @@ class LightAction(IkeaActionBase):
         self._set_property(key="color_saturation", value=saturation)
 
     def on_select_light(self, option):
-        selected_light = option.get_active()
-        print(dir(selected_light))
+        light_index = option.get_active()
+        if not self.lights:
+            return
+
+        light = self.lights[light_index]
+        self.selected_light = light.id
