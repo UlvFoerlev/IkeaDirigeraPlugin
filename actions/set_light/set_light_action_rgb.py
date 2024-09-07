@@ -44,7 +44,7 @@ class SetLightRGBAction(SetLightAction):
             "value-changed", self.on_color_green_slider_change
         )
 
-        base.append(self.color_red_slider)
+        base.append(self.color_green_slider)
 
     def setup_blue_slider(self, base):
         self.color_blue_slider = ScaleRow(
@@ -66,7 +66,7 @@ class SetLightRGBAction(SetLightAction):
 
     @property
     def color_red(self) -> int:
-        return self._get_property(key="color_red", default=100, enforce_type=int)
+        return self._get_property(key="color_red", default=255, enforce_type=int)
 
     @color_red.setter
     def color_red(self, value: int):
@@ -79,7 +79,7 @@ class SetLightRGBAction(SetLightAction):
 
     @property
     def color_green(self) -> int:
-        return self._get_property(key="color_green", default=100, enforce_type=int)
+        return self._get_property(key="color_green", default=255, enforce_type=int)
 
     @color_green.setter
     def color_green(self, value: int):
@@ -92,7 +92,7 @@ class SetLightRGBAction(SetLightAction):
 
     @property
     def color_blue(self) -> int:
-        return self._get_property(key="color_blue", default=100, enforce_type=int)
+        return self._get_property(key="color_blue", default=255, enforce_type=int)
 
     @color_blue.setter
     def color_blue(self, value: int):
