@@ -32,7 +32,7 @@ class SetLightAction(LightAction):
         return base
 
     def setup_light_toggle(self, base):
-        self.light_toggle = Gtk.ToggleButton("Light On/Off")
+        self.light_toggle = Gtk.ToggleButton.new_with_label("Light On/Off")
 
         self.light_toggle.set_active(self.active)
 
