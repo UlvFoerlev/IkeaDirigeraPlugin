@@ -5,6 +5,7 @@ from .set_light_action import SetLightAction
 
 class SetLightRGBAction(SetLightAction):
     def _setup_settings(self, base):
+        self.setup_fadein_time_settings(base=base)
         self.setup_light_toggle(base=base)
         self.setup_red_slider(base=base)
         self.setup_green_slider(base=base)
