@@ -152,6 +152,8 @@ class Backend(BackendBase):
                 else None
             )
 
+            print(c_level, c_temperature, c_hue, c_saturation)
+
             self._alter_light_state(
                 light=light,
                 level=c_level,
