@@ -156,7 +156,7 @@ class SetLightAction(LightAction):
             light=self.light,
             active=self.active,
             level=self.light_level,
-            temperature=self.color_saturation,
+            # temperature=self.color_saturation,
             hue=self.color_hue,
             saturation=self.color_saturation,
         )
