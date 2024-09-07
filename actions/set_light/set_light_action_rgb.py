@@ -113,6 +113,7 @@ class SetLightRGBAction(SetLightAction):
 
         if r >= g and r >= b:
             hue = ((g - b) / delta) % 6
+            print("opt 1")
         elif g >= r and g >= b:
             hue = 2.0 + (b - r) / delta
         elif b >= g and b >= r:
