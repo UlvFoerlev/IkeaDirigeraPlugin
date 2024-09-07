@@ -27,7 +27,7 @@ class SetLightAction(LightAction):
 
     def get_config_rows(self):
         base = super().get_config_rows()
-        self._setup_settings(self, base)
+        self._setup_settings(base)
 
         return base
 
