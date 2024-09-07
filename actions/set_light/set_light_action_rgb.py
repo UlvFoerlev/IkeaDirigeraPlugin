@@ -113,9 +113,9 @@ class SetLightRGBAction(SetLightAction):
 
         if r >= g and r >= b:
             hue = (g - b) / (r - min([r, g, b]))
-        if g >= r and g >= b:
+        elif g >= r and g >= b:
             hue = 2.0 + (b - r) / (g - min([r, g, b]))
-        if b >= g and b >= r:
+        elif b >= g and b >= r:
             hue = 4.0 + (r - g) / (b - min([r, g, b]))
 
         return int(hue * 60) % 360
