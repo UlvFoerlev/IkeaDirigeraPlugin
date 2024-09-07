@@ -135,7 +135,7 @@ class SetLightRGBAction(SetLightAction):
         return delta / dividend
 
     def _calculate_light_level_from_rgb(self, r: float, g: float, b: float) -> int:
-        print("pre", (max([r, g, b]) + min([r, g, b])))
+        print("pre", max([r, g, b]), min([r, g, b]))
         return int(max([r, g, b]) + min([r, g, b]) / 2) * 100
 
     def on_color_red_slider_change(self, entry):
