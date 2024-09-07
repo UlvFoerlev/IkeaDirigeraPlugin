@@ -41,7 +41,7 @@ class LightAction(IkeaActionBase):
             if light.id == self.selected_light:
                 selected_light_index = i
 
-        if not self.selected_light:
+        if not self.selected_light and self.lights:
             self.selected_light = self.lights[0].id
 
         self.mode_cell_renderer = Gtk.CellRendererText(
