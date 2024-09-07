@@ -3,6 +3,11 @@ from pathlib import Path
 from dirigera import Hub
 from dirigera.devices.light import Light
 from requests import ConnectionError
+from typing import Any
+
+
+def clamp(val: Any, minimum: Any, maximum: any):
+    return max(min(val, maximum), minimum)
 
 
 class Backend(BackendBase):
@@ -44,7 +49,7 @@ class Backend(BackendBase):
         level: int | None = None,
         temperature: int | None = None,
         hue: int | None = None,
-        saturation: int | None = None,
+        saturation: float | None = None,
     ):
         light.set_light(lamp_on=active)
 
@@ -52,13 +57,24 @@ class Backend(BackendBase):
             return
 
         if level:
-            light.set_light_level(level)
+            light.set_light_level(clamp(level, 1, 100))
+
         if temperature:
-            light.set_color_temperature(color_temp=temperature)
+            temp_min = light.attributes.color_temperature_min
+            temp_max = light.attributes.color_temperature_max
+
+            if temp_min > temp_max:
+                temp_min, temp_max = temp_max, temp_min
+
+            light.set_color_temperature(
+                color_temp=clamp(temperature, temp_min, temp_max)
+            )
 
         if hue or saturation:
             new_hue = hue or light.attributes.color_hue
+            new_hue = clamp(new_hue, 0, 360)
             new_saturation = saturation or light.attributes.color_saturation
+            new_saturation = clamp(new_saturation, 0.0, 1.0)
 
             light.set_light_color(hue=new_hue, saturation=new_saturation)
 
