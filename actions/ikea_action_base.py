@@ -41,7 +41,7 @@ class IkeaActionBase(ActionBase):
         base.append(self.token_input)
 
     def get_config_rows(self):
-        if not self.hub:
+        if not self.plugin_base.backend.hub:
             self.refresh_hub()
 
         base = super().get_config_rows()
