@@ -70,7 +70,7 @@ class SetLightRGBAction(SetLightAction):
 
     @color_red.setter
     def color_red(self, value: int):
-        if value < 0 or value > 360:
+        if value < 0 or value > 255:
             raise ValueError(
                 f"Parameter 'value' must be between 0 and 255, not {value}."
             )
@@ -83,7 +83,7 @@ class SetLightRGBAction(SetLightAction):
 
     @color_green.setter
     def color_green(self, value: int):
-        if value < 0 or value > 360:
+        if value < 0 or value > 255:
             raise ValueError(
                 f"Parameter 'value' must be between 0 and 255, not {value}."
             )
@@ -96,7 +96,7 @@ class SetLightRGBAction(SetLightAction):
 
     @color_blue.setter
     def color_blue(self, value: int):
-        if value < 0 or value > 360:
+        if value < 0 or value > 255:
             raise ValueError(
                 f"Parameter 'value' must be between 0 and 255, not {value}."
             )
@@ -123,7 +123,7 @@ class SetLightRGBAction(SetLightAction):
         if delta == 0:
             return 0
 
-        light_level = self._calculate_light_level_from_rgb(r, g, b)
+        light_level = self.calculate_light_level_from_rgb(r, g, b) / 100
 
         dividend = 1 - abs(2 * light_level - 1)
 
@@ -133,7 +133,7 @@ class SetLightRGBAction(SetLightAction):
         return delta / dividend
 
     def _calculate_light_level_from_rgb(self, r: float, g: float, b: float) -> int:
-        return int(max([r, g, b]) + min([r, g, b]) / 2)
+        return int(max([r, g, b]) + min([r, g, b]) / 2) * 100
 
     def on_color_red_slider_change(self, entry):
         self.color_red = int(entry.get_value())
@@ -163,6 +163,8 @@ class SetLightRGBAction(SetLightAction):
         R = self.color_red / 255
         G = self.color_green / 255
         B = self.color_blue / 255
+
+        print(R, G, B)
 
         hue = self._calculate_hue_from_rgb(R, G, B)
         saturation = self._calculate_saturation_from_rgb(R, G, B)
