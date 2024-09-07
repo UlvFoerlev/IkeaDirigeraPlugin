@@ -51,7 +51,8 @@ class Backend(BackendBase):
         hue: int | None = None,
         saturation: float | None = None,
     ):
-        light.set_light(lamp_on=active)
+        if light.attributes.is_on != active:
+            light.set_light(lamp_on=active)
 
         if active is False:
             return
