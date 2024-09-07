@@ -137,7 +137,7 @@ class Backend(BackendBase):
             c_temperature = (
                 int(float(light.attributes.color_temperature) + temperature_step)
                 if temperature is not None
-                or light.attributes.color_temperature < temperature
+                and light.attributes.color_temperature < temperature
                 else None
             )
             c_hue = (
