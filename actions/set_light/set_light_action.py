@@ -151,6 +151,9 @@ class SetLightAction(LightAction):
     def on_light_toggled(self, *args, **kwargs):
         self.active = self.light_toggle.get_active()
 
+    def on_fadein_time_scale_change(self, entry):
+        self.fade_in_time = int(entry.get_value())
+
     def on_key_down(self):
         # Initiate hub if not initiated yet
         if not self.plugin_base.backend.hub:
