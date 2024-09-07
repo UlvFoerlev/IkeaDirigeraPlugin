@@ -109,14 +109,14 @@ class SetLightRGBAction(SetLightAction):
         if r == g == b:
             return 0
 
-        print("asdsad", r, g, b)
+        delta = max([r, g, b]) - min([r, g, b])
 
         if r >= g and r >= b:
-            hue = (g - b) / (r - min([r, g, b]))
+            hue = (g - b) / delta
         elif g >= r and g >= b:
-            hue = 2.0 + (b - r) / (g - min([r, g, b]))
+            hue = 2.0 + (b - r) / delta
         elif b >= g and b >= r:
-            hue = 4.0 + (r - g) / (b - min([r, g, b]))
+            hue = 4.0 + (r - g) / delta
 
         return int(hue * 60) % 360
 
@@ -135,6 +135,7 @@ class SetLightRGBAction(SetLightAction):
         return delta / dividend
 
     def _calculate_light_level_from_rgb(self, r: float, g: float, b: float) -> int:
+        print("pre", (max([r, g, b]) + min([r, g, b]) / 2))
         return int(max([r, g, b]) + min([r, g, b]) / 2) * 100
 
     def on_color_red_slider_change(self, entry):
