@@ -133,7 +133,7 @@ class SetLightAction(LightAction):
     def on_color_saturation_scale_change(self, entry):
         self.color_saturation = entry.get_value()
 
-    def on_light_toggled(self, *args, **kwargs)
+    def on_light_toggled(self, *args, **kwargs):
         self.active = self.light_toggle.get_active()
 
     def on_key_down(self):
