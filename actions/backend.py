@@ -93,82 +93,13 @@ class Backend(BackendBase):
         if active is False:
             return
 
-        if fade_in == 0:
-            self._alter_light_state(
-                light=light,
-                level=level,
-                temperature=temperature,
-                hue=hue,
-                saturation=saturation,
-            )
-            return
-
-        steps = int(fade_in * 10)
-
-        level_diff = light.attributes.light_level - level if level is not None else None
-        temperature_diff = (
-            light.attributes.color_temperature - temperature
-            if temperature is not None
-            else None
+        self._alter_light_state(
+            light=light,
+            level=level,
+            temperature=temperature,
+            hue=hue,
+            saturation=saturation,
         )
-        hue_diff = light.attributes.color_hue - hue if hue is not None else None
-        saturation_diff = (
-            light.attributes.color_saturation - saturation
-            if saturation is not None
-            else None
-        )
-
-        level_step = float(level_diff) / float(steps) if level_diff else None
-        temperature_step = (
-            float(temperature_diff) / float(steps) if temperature_diff else None
-        )
-        hue_step = float(hue_diff) / float(steps) if hue_diff else None
-        saturation_step = (
-            float(saturation_diff) / float(steps) if saturation_diff else None
-        )
-
-        for i in range(steps):
-            sleep(0.1)
-            c_level = (
-                int(float(light.attributes.light_level) + level_step)
-                if level is not None and light.attributes.light_level != level
-                else None
-            )
-            c_temperature = (
-                int(float(light.attributes.color_temperature) + temperature_step)
-                if temperature is not None
-                and light.attributes.color_temperature != temperature
-                else None
-            )
-            c_hue = (
-                int(float(light.attributes.color_hue) + hue_step)
-                if hue is not None and light.attributes.color_hue != hue
-                else None
-            )
-            c_saturation = (
-                float(light.attributes.color_saturation) + saturation_step
-                if saturation is not None
-                and round(light.attributes.color_saturation, 2) != round(saturation, 2)
-                else None
-            )
-
-            print(c_level, c_temperature, c_hue, c_saturation)
-
-            self._alter_light_state(
-                light=light,
-                level=c_level,
-                temperature=c_temperature,
-                hue=c_hue,
-                saturation=c_saturation,
-            )
-
-            if (
-                c_level is None
-                and c_temperature is None
-                and c_hue is None
-                and c_saturation is None
-            ):
-                break
 
 
 backend = Backend()
