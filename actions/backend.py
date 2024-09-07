@@ -56,9 +56,6 @@ class Backend(BackendBase):
         if active is False:
             return
 
-        if level:
-            light.set_light_level(clamp(level, 1, 100))
-
         if temperature is not None:
             temp_min = light.attributes.color_temperature_min
             temp_max = light.attributes.color_temperature_max
@@ -81,6 +78,9 @@ class Backend(BackendBase):
             new_saturation = clamp(new_saturation, 0.0, 1.0)
 
             light.set_light_color(hue=new_hue, saturation=new_saturation)
+
+        if level:
+            light.set_light_level(clamp(level, 1, 100))
 
 
 backend = Backend()

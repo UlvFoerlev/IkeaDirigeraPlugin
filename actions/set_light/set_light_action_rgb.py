@@ -169,11 +169,12 @@ class SetLightRGBAction(SetLightAction):
 
         hue = self._calculate_hue_from_rgb(R, G, B)
         saturation = self._calculate_saturation_from_rgb(R, G, B)
-        # light_level = self._calculate_light_level_from_rgb(R, G, B)
+        light_level = self._calculate_light_level_from_rgb(R, G, B)
 
         self.plugin_base.backend.set_light_state(
             light=self.light,
             active=self.active,
+            level=light_level,
             hue=hue,
             saturation=saturation,
         )
