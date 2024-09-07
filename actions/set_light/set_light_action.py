@@ -16,11 +16,11 @@ class SetLightAction(LightAction):
         return self.plugin_base.backend.lights_cache.get(self.selected_light)
 
     def _setup_settings(self, base):
+        self.setup_fadein_time_settings(base=base)
         self.setup_light_level_settings(base=base)
         self.setup_color_temperature_settings(base=base)
         self.setup_color_hue_settings(base=base)
         self.setup_color_saturation_settings(base=base)
-        pass
 
     def get_config_rows(self):
         base = super().get_config_rows()
@@ -36,6 +36,24 @@ class SetLightAction(LightAction):
         self.light_toggle.connect("toggled", self.on_light_toggled)
 
         base.append(self.light_toggle)
+
+    def setup_fadein_time_settings(self, base):
+        self.fadein_time_scale = ScaleRow(
+            title=self.plugin_base.lm.get("action.set-light.light-level"),
+            value=self.fade_in_time,
+            min=1,
+            max=100,
+            step=1,
+            text_left="1",
+            text_right="100",
+        )
+        self.fadein_time_scale.scale.set_draw_value(True)
+
+        self.fadein_time_scale.adjustment.connect(
+            "value-changed", self.on_fadein_time_scale_change
+        )
+
+        base.append(self.fadein_time_scale)
 
     def setup_light_level_settings(self, base):
         self.light_level_scale = ScaleRow(
@@ -157,3 +175,11 @@ class SetLightAction(LightAction):
             hue=self.color_hue,
             saturation=self.color_saturation,
         )
+
+    @property
+    def fade_in_time(self) -> int:
+        return self._get_property(key="fade_in_time", default=100, enforce_type=int)
+
+    @fade_in_time.setter
+    def fade_in_time(self, level: int):
+        self._set_property(key="fade_in_time", value=level)
