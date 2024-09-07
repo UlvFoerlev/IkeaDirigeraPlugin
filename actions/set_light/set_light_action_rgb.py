@@ -111,17 +111,19 @@ class SetLightRGBAction(SetLightAction):
         if (r == g == b) or delta == 0:
             return 0
 
-        def diff(a, b):
-            return max([a, b]) - min([a, b])
+        def diff(val0, val1):
+            return max([val0, val1]) - min([val0, val1])
 
         if r >= g and r >= b:
-            hue = (diff(g, b) / delta) % 6
+            hue = (diff(g, b) / delta) % 6.0
         elif g >= r and g >= b:
             hue = 2.0 + diff(b, r) / delta
         elif b >= g and b >= r:
             hue = 4.0 + diff(r, g) / delta
 
-        return int(hue * 60) % 360
+        print(hue, int(hue * 60.0) % 360)
+
+        return int(hue * 60.0) % 360
 
     def _calculate_saturation_from_rgb(self, r: float, g: float, b: float) -> float:
         delta = max([r, g, b]) - min([r, g, b])
