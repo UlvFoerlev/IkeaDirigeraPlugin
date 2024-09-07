@@ -128,7 +128,7 @@ class SetLightRGBAction(SetLightAction):
         dividend = 1 - abs(2 * light_level - 1)
 
         if dividend == 0:
-            return delta
+            return 1
 
         return delta / dividend
 
