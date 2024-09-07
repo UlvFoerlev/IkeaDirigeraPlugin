@@ -111,13 +111,15 @@ class SetLightRGBAction(SetLightAction):
         if (r == g == b) or delta == 0:
             return 0
 
+        def diff(a, b):
+            return max([a, b]) - min([a, b])
+
         if r >= g and r >= b:
-            hue = ((g - b) / delta) % 6
-            print("opt 1")
+            hue = (diff(g, b) / delta) % 6
         elif g >= r and g >= b:
-            hue = 2.0 + (b - r) / delta
+            hue = 2.0 + diff(b, r) / delta
         elif b >= g and b >= r:
-            hue = 4.0 + (r - g) / delta
+            hue = 4.0 + diff(r, g) / delta
 
         return int(hue * 60) % 360
 
