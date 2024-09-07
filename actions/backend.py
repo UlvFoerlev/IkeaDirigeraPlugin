@@ -153,7 +153,7 @@ class Backend(BackendBase):
             )
 
             self._alter_light_state(
-                light=True,
+                light=light,
                 level=c_level,
                 temperature=c_temperature,
                 hue=c_hue,
