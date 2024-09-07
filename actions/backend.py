@@ -46,21 +46,21 @@ class Backend(BackendBase):
         hue: int | None = None,
         saturation: int | None = None,
     ):
-        self.light.set_light(lamp_on=self.active)
+        light.set_light(lamp_on=self.active)
 
         if active is False:
             return
 
         if level:
-            self.light.set_light_level(level)
+            light.set_light_level(level)
         if temperature:
-            self.light.set_color_temperature(color_temp=temperature)
+            light.set_color_temperature(color_temp=temperature)
 
         if hue or saturation:
             new_hue = hue or light.attributes.color_hue
             new_saturation = saturation or light.attributes.color_saturation
 
-            self.light.set_light_color(hue=new_hue, saturation=new_saturation)
+            light.set_light_color(hue=new_hue, saturation=new_saturation)
 
 
 backend = Backend()
