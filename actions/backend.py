@@ -105,13 +105,17 @@ class Backend(BackendBase):
 
         steps = int(fade_in * 10)
 
-        level_diff = light.attributes.light_level - level if level else None
+        level_diff = light.attributes.light_level - level if level is not None else None
         temperature_diff = (
-            light.attributes.color_temperature - temperature if temperature else None
+            light.attributes.color_temperature - temperature
+            if temperature is not None
+            else None
         )
-        hue_diff = light.attributes.color_hue - hue if hue else None
+        hue_diff = light.attributes.color_hue - hue if hue is not None else None
         saturation_diff = (
-            light.attributes.color_saturation - saturation if saturation else None
+            light.attributes.color_saturation - saturation
+            if saturation is not None
+            else None
         )
 
         level_step = float(level_diff) / float(steps) if level_diff else None
@@ -127,22 +131,24 @@ class Backend(BackendBase):
             sleep(0.1)
             c_level = (
                 int(float(light.attributes.light_level) + level_step)
-                if light.attributes.light_level < level or not level
+                if level is not None and light.attributes.light_level < level
                 else None
             )
             c_temperature = (
                 int(float(light.attributes.color_temperature) + temperature_step)
-                if light.attributes.color_temperature < temperature or not temperature
+                if temperature is not None
+                or light.attributes.color_temperature < temperature
                 else None
             )
             c_hue = (
                 int(float(light.attributes.color_hue) + hue_step)
-                if light.attributes.color_hue < hue or not hue
+                if hue is not None and light.attributes.color_hue < hue
                 else None
             )
             c_saturation = (
                 int(float(light.attributes.color_saturation) + saturation_step)
-                if light.attributes.color_saturation < saturation or not saturation
+                if saturation is not None
+                and light.attributes.color_saturation < saturation
                 else None
             )
 
