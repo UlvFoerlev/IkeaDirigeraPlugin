@@ -31,6 +31,15 @@ class SetLightAction(LightAction):
 
         return base
 
+    def setup_light_toggle(self, base):
+        self.light_toggle = Gtk.ToggleButton("Light On/Off")
+
+        self.light_toggle.set_active(self.active)
+
+        self.light_toggle.connect("toggled", self.on_light_toggled)
+
+        base.append(self.light_toggle)
+
     def setup_light_level_settings(self, base):
         self.light_level_scale = ScaleRow(
             title=self.plugin_base.lm.get("action.set-light.light-level"),
@@ -123,6 +132,9 @@ class SetLightAction(LightAction):
 
     def on_color_saturation_scale_change(self, entry):
         self.color_saturation = entry.get_value()
+
+    def on_light_toggled(self, *args, **kwargs)
+        self.active = self.light_toggle.get_active()
 
     def on_key_down(self):
         # Initiate hub if not initiated yet

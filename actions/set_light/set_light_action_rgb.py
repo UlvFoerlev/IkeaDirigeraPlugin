@@ -6,6 +6,7 @@ from GtkHelper.GtkHelper import ComboRow, ScaleRow
 
 class SetLightRGBAction(SetLightAction):
     def _setup_settings(self, base):
+        self.setup_light_toggle(base=base)
         self.setup_red_slider(base=base)
         self.setup_green_slider(base=base)
         self.setup_blue_slider(base=base)
