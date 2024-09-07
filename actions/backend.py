@@ -4,6 +4,7 @@ from dirigera import Hub
 from dirigera.devices.light import Light
 from requests import ConnectionError
 from streamcontroller_plugin_tools import BackendBase
+from time import sleep
 
 
 def clamp(val: Any, minimum: Any, maximum: any):
@@ -42,21 +43,14 @@ class Backend(BackendBase):
             self.reset_hub()
             return []
 
-    def set_light_state(
+    def _alter_light_state(
         self,
         light: Light,
-        active: bool = True,
         level: int | None = None,
         temperature: int | None = None,
         hue: int | None = None,
         saturation: float | None = None,
     ):
-        if light.attributes.is_on != active:
-            light.set_light(lamp_on=active)
-
-        if active is False:
-            return
-
         if temperature is not None:
             temp_min = light.attributes.color_temperature_min
             temp_max = light.attributes.color_temperature_max
@@ -82,6 +76,83 @@ class Backend(BackendBase):
 
         if level:
             light.set_light_level(clamp(level, 1, 100))
+
+    def set_light_state(
+        self,
+        light: Light,
+        active: bool = True,
+        level: int | None = None,
+        temperature: int | None = None,
+        hue: int | None = None,
+        saturation: float | None = None,
+        fade_in: int = 0,
+    ):
+        if light.attributes.is_on != active:
+            light.set_light(lamp_on=active)
+
+        if active is False:
+            return
+
+        if fade_in == 0:
+            self._alter_light_state(
+                light=light,
+                level=level,
+                temperature=temperature,
+                hue=hue,
+                saturation=saturation,
+            )
+            return
+
+        steps = int(fade_in * 10)
+
+        level_diff = light.attributes.light_level - level if level else None
+        temperature_diff = (
+            light.attributes.color_temperature - temperature if temperature else None
+        )
+        hue_diff = light.attributes.color_hue - hue if hue else None
+        saturation_diff = (
+            light.attributes.color_saturation - saturation if saturation else None
+        )
+
+        level_step = float(level_diff) / float(steps) if level_diff else None
+        temperature_step = (
+            float(temperature_diff) / float(steps) if temperature_diff else None
+        )
+        hue_step = float(hue_diff) / float(steps) if hue_diff else None
+        saturation_step = (
+            float(saturation_diff) / float(steps) if saturation_diff else None
+        )
+
+        for i in range(steps):
+            sleep(0.1)
+            c_level = (
+                int(float(light.attributes.light_level) + level_step)
+                if light.attributes.light_level < level
+                else None
+            )
+            c_temperature = (
+                int(float(light.attributes.light_temperature) + temperature_step)
+                if light.attributes.light_temperature < temperature
+                else None
+            )
+            c_hue = (
+                int(float(light.attributes.light_hue) + hue_step)
+                if light.attributes.light_hue < hue
+                else None
+            )
+            c_saturation = (
+                int(float(light.attributes.light_saturation) + saturation_step)
+                if light.attributes.light_saturation < saturation
+                else None
+            )
+
+            self._alter_light_state(
+                light=True,
+                level=c_level,
+                temperature=c_temperature,
+                hue=c_hue,
+                saturation=c_saturation,
+            )
 
 
 backend = Backend()

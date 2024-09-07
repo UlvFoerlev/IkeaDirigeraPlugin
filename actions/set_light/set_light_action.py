@@ -43,7 +43,7 @@ class SetLightAction(LightAction):
             value=self.fade_in_time,
             min=0,
             max=60,
-            step=1,
+            step=0.1,
             text_left="0",
             text_right="60",
         )
@@ -152,7 +152,7 @@ class SetLightAction(LightAction):
         self.active = self.light_toggle.get_active()
 
     def on_fadein_time_scale_change(self, entry):
-        self.fade_in_time = int(entry.get_value())
+        self.fade_in_time = entry.get_value()
 
     def on_key_down(self):
         # Initiate hub if not initiated yet
@@ -180,9 +180,9 @@ class SetLightAction(LightAction):
         )
 
     @property
-    def fade_in_time(self) -> int:
-        return self._get_property(key="fade_in_time", default=0, enforce_type=int)
+    def fade_in_time(self) -> float:
+        return self._get_property(key="fade_in_time", default=0.0, enforce_type=float)
 
     @fade_in_time.setter
-    def fade_in_time(self, level: int):
+    def fade_in_time(self, level: float):
         self._set_property(key="fade_in_time", value=level)

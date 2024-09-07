@@ -177,4 +177,5 @@ class SetLightRGBAction(SetLightAction):
             level=light_level,
             hue=hue,
             saturation=saturation,
+            fade_in=self.fade_in_time,
         )
