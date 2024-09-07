@@ -41,11 +41,11 @@ class SetLightAction(LightAction):
         self.fadein_time_scale = ScaleRow(
             title=self.plugin_base.lm.get("action.set-light.light-fade_in"),
             value=self.fade_in_time,
-            min=1,
-            max=100,
+            min=0,
+            max=60,
             step=1,
-            text_left="1",
-            text_right="100",
+            text_left="0",
+            text_right="60",
         )
         self.fadein_time_scale.scale.set_draw_value(True)
 
