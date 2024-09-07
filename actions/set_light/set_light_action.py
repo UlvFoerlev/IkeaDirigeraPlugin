@@ -181,7 +181,7 @@ class SetLightAction(LightAction):
 
     @property
     def fade_in_time(self) -> int:
-        return self._get_property(key="fade_in_time", default=100, enforce_type=int)
+        return self._get_property(key="fade_in_time", default=0, enforce_type=int)
 
     @fade_in_time.setter
     def fade_in_time(self, level: int):
