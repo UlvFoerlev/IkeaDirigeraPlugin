@@ -125,7 +125,12 @@ class SetLightRGBAction(SetLightAction):
 
         light_level = self._calculate_light_level_from_rgb(r, g, b)
 
-        return delta / (1 - abs(2 * light_level - 1))
+        dividend = 1 - abs(2 * light_level - 1)
+
+        if delta == dividend:
+            return 0
+
+        return delta / dividend
 
     def _calculate_light_level_from_rgb(self, r: float, g: float, b: float) -> int:
         return int(max([r, g, b]) + min([r, g, b]) / 2)
