@@ -127,22 +127,22 @@ class Backend(BackendBase):
             sleep(0.1)
             c_level = (
                 int(float(light.attributes.light_level) + level_step)
-                if light.attributes.light_level < level
+                if light.attributes.light_level < level or not level
                 else None
             )
             c_temperature = (
                 int(float(light.attributes.color_temperature) + temperature_step)
-                if light.attributes.color_temperature < temperature
+                if light.attributes.color_temperature < temperature or not temperature
                 else None
             )
             c_hue = (
                 int(float(light.attributes.color_hue) + hue_step)
-                if light.attributes.color_hue < hue
+                if light.attributes.color_hue < hue or not hue
                 else None
             )
             c_saturation = (
                 int(float(light.attributes.color_saturation) + saturation_step)
-                if light.attributes.color_saturation < saturation
+                if light.attributes.color_saturation < saturation or not saturation
                 else None
             )
 
