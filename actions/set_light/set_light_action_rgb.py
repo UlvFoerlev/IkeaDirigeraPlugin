@@ -108,6 +108,7 @@ class SetLightRGBAction(SetLightAction):
 
         delta = max([r, g, b]) - min([r, g, b])
 
+        print((r == g == b), delta)
         if (r == g == b) or delta == 0:
             return 0
 
