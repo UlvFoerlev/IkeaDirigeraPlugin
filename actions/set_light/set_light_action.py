@@ -20,7 +20,7 @@ class SetLightAction(LightAction):
 
     def _setup_settings(self, base):
         self.setup_light_level_settings(base=base)
-        # self.setup_color_temperature_settings(base=base)
+        self.setup_color_temperature_settings(base=base)
         self.setup_color_hue_settings(base=base)
         self.setup_color_saturation_settings(base=base)
         pass
@@ -156,7 +156,7 @@ class SetLightAction(LightAction):
             light=self.light,
             active=self.active,
             level=self.light_level,
-            temperature=self.color_saturation,
+            temperature=self.color_temperature,
             hue=self.color_hue,
             saturation=self.color_saturation,
         )
