@@ -1,6 +1,6 @@
 from .ikea_action_base import IkeaActionBase
-from gi.repository import Adw, Gtk, Pango
-from GtkHelper.GtkHelper import ComboRow, ScaleRow
+from gi.repository import Gtk, Pango
+from GtkHelper.GtkHelper import ComboRow
 
 
 class LightAction(IkeaActionBase):

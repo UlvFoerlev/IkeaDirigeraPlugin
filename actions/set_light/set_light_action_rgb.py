@@ -1,7 +1,6 @@
-from .set_light_action import SetLightAction
+from GtkHelper.GtkHelper import ScaleRow
 
-from gi.repository import Adw, Gtk, Pango
-from GtkHelper.GtkHelper import ComboRow, ScaleRow
+from .set_light_action import SetLightAction
 
 
 class SetLightRGBAction(SetLightAction):

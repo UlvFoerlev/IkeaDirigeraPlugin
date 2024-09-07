@@ -1,8 +1,5 @@
-from pathlib import Path
-from urllib.parse import parse_qs, urlparse
-
-from gi.repository import Adw, Gtk, Pango
-from GtkHelper.GtkHelper import ComboRow, ScaleRow
+from gi.repository import Gtk
+from GtkHelper.GtkHelper import ScaleRow
 
 from ..light_action import LightAction
 
