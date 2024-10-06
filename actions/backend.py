@@ -115,7 +115,7 @@ class Backend(BackendBase):
             "level": 100,
             "temperature": 0,
             "hue": 0,
-            "saturation": 1.0,
+            "saturation": 0.0,
         }
 
         self.set_light_state(light=light, **new_state)
