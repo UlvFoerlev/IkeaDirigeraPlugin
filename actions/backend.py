@@ -118,13 +118,13 @@ class Backend(BackendBase):
             "saturation": 1.0,
         }
 
-        self.set_light_state(**new_state)
+        self.set_light_state(light=light, **new_state)
         sleep(0.15)
-        self.set_light_state(**prev_state)
+        self.set_light_state(light=light, **prev_state)
         sleep(0.1)
-        self.set_light_state(**new_state)
+        self.set_light_state(light=light, **new_state)
         sleep(0.15)
-        self.set_light_state(**prev_state)
+        self.set_light_state(light=light, **prev_state)
 
 
 backend = Backend()
