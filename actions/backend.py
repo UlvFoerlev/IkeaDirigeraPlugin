@@ -51,16 +51,16 @@ class Backend(BackendBase):
         hue: int | None = None,
         saturation: float | None = None,
     ):
-        if temperature is not None:
-            temp_min = light.attributes.color_temperature_min
-            temp_max = light.attributes.color_temperature_max
+        # if temperature is not None:
+        #     temp_min = light.attributes.color_temperature_min
+        #     temp_max = light.attributes.color_temperature_max
 
-            if temp_min > temp_max:
-                temp_min, temp_max = temp_max, temp_min
+        #     if temp_min > temp_max:
+        #         temp_min, temp_max = temp_max, temp_min
 
-            light.set_color_temperature(
-                color_temp=clamp(temperature, temp_min, temp_max)
-            )
+        #     light.set_color_temperature(
+        #         color_temp=clamp(temperature, temp_min, temp_max)
+        #     )
 
         if hue is not None or saturation is not None:
             new_hue = hue if hue is not None else light.attributes.color_hue
