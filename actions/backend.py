@@ -126,7 +126,7 @@ class Backend(BackendBase):
         for i in range(randint(0, 1)):
             sleep(uniform(0.1, 0.3))
             self.set_light_state(light=light, **new_state)
-            sleep(0.025)
+            sleep(0.015)
             self.set_light_state(light=light, **prev_state)
 
 
