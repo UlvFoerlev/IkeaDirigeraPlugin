@@ -8,5 +8,6 @@
     "action.set-light.temperature": "Temperature",
     "action.set-light.red": "Red",
     "action.set-light.green": "Green",
-    "action.set-light.blue": "Blue"
+    "action.set-light.blue": "Blue",
+    "action.effect-thunder": "Thunder Effect"
 }

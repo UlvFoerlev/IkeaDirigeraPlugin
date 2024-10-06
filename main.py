@@ -5,6 +5,7 @@ from pathlib import Path
 
 from .actions.set_light.set_light_action import SetLightAction
 from .actions.set_light.set_light_action_rgb import SetLightRGBAction
+from .actions.effects.effect_thunder_action import EffectThunderAction
 
 
 # Wiki
@@ -42,6 +43,14 @@ class PluginYoutubePlaylist(PluginBase):
             action_base=SetLightRGBAction,
             action_id="dev_uf_IkeaDirigera::SetLightRGB",
             action_name=self.lm.get("action.set-light-rgb.name"),
+        )
+        self.add_action_holder(self.set_light_RGB)
+
+        self.effect_thunder = ActionHolder(
+            plugin_base=self,
+            action_base=EffectThunderAction,
+            action_id="dev_uf_IkeaDirigera::EffectThunder",
+            action_name=self.lm.get("action.effect-thunder"),
         )
         self.add_action_holder(self.set_light_RGB)
 

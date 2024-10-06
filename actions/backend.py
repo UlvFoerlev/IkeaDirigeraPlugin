@@ -101,5 +101,30 @@ class Backend(BackendBase):
             saturation=saturation,
         )
 
+    def thunder_effect(self, light: Light):
+        prev_state = {
+            "active": light.attributes.is_on,
+            "level": light.attributes.light_level,
+            "temperature": light.attributes.color_temperature,
+            "hue": light.attributes.color_hue,
+            "saturation": light.attributes.color_saturation,
+        }
+
+        new_state = {
+            "active": True,
+            "level": 100,
+            "temperature": 0,
+            "hue": 0,
+            "saturation": 1.0,
+        }
+
+        self.set_light_state(**new_state)
+        sleep(0.15)
+        self.set_light_state(**prev_state)
+        sleep(0.1)
+        self.set_light_state(**new_state)
+        sleep(0.15)
+        self.set_light_state(**prev_state)
+
 
 backend = Backend()
