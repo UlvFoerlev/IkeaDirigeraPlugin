@@ -5,7 +5,7 @@ from dirigera.devices.light import Light
 from requests import ConnectionError
 from streamcontroller_plugin_tools import BackendBase
 from time import sleep
-from random import uniform
+from random import uniform, randint
 
 
 def clamp(val: Any, minimum: Any, maximum: any):
@@ -120,12 +120,14 @@ class Backend(BackendBase):
         }
 
         self.set_light_state(light=light, **new_state)
-        sleep(0.1)
+        sleep(0.05)
         self.set_light_state(light=light, **prev_state)
-        sleep(uniform(0.1, 0.3))
-        self.set_light_state(light=light, **new_state)
-        sleep(0.1)
-        self.set_light_state(light=light, **prev_state)
+
+        for i in range(randint(0, 2)):
+            sleep(uniform(0.1, 0.3))
+            self.set_light_state(light=light, **new_state)
+            sleep(0.05)
+            self.set_light_state(light=light, **prev_state)
 
 
 backend = Backend()
