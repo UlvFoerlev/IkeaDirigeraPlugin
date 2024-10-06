@@ -36,4 +36,4 @@ class EffectThunderAction(LightAction):
         if not self.light:
             return
 
-        self.plugin_base.backend.thunder_effect()
+        self.plugin_base.backend.thunder_effect(light=self.light)
