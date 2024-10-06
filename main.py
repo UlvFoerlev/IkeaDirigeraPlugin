@@ -52,7 +52,7 @@ class PluginYoutubePlaylist(PluginBase):
             action_id="dev_uf_IkeaDirigera::EffectThunder",
             action_name=self.lm.get("action.effect-thunder"),
         )
-        self.add_action_holder(self.set_light_RGB)
+        self.add_action_holder(self.effect_thunder)
 
     def setup_backend(self):
         # Launch backend
